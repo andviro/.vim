@@ -3,10 +3,11 @@ scriptencoding utf-8
 call plug#begin()
     " system
     Plug 's3rvac/AutoFenc'
-    Plug 'benekastah/neomake'
+    "Plug 'benekastah/neomake'
 
     " appearance
     Plug 'andviro/NeoSolarized'
+    "Plug 'lifepillar/vim-solarized8'
     Plug 'bling/vim-airline'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
@@ -165,7 +166,10 @@ set background=dark
 set display+=lastline
 let g:neosolarized_contrast='normal'
 let g:neosolarized_visibility='low'
+"colorscheme solarized8_dark
 colorscheme NeoSolarized
+hi ValidatorErrorSign ctermbg=0 cterm=bold ctermfg=88 term=standout
+hi ValidatorWarningSign ctermbg=0 cterm=bold ctermfg=3 term=standout
 "highlight NonText cterm=none ctermbg=none ctermfg=23
 "highlight SpecialKey cterm=none ctermbg=none ctermfg=23
 "
@@ -267,7 +271,7 @@ au!
     au BufRead,BufNewFile *.txt setlocal ft=asciidoc
     au BufRead *.hva setlocal ft=tex
     au BufWrite *.html :Autoformat
-    au BufWrite *.ts :Neomake
+    "au BufWrite *.ts :Neomake
     au BufAdd,BufNewFile,BufRead * let b:base_project_dir = init#projectDir()
 augroup END
 
