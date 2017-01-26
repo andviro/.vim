@@ -209,6 +209,8 @@ nnoremap <silent> <C-l> :bnext<CR>
 nnoremap <silent> <C-h> :bprev<CR>
 nnoremap <silent> <C-W>q :bprev <BAR> bdelete #<CR>
 nnoremap <silent> <CR> <C-]>
+nnoremap H <C-o>
+nnoremap L <C-i>
 
 " Neovim terminal
 if has("nvim")
