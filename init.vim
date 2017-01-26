@@ -37,7 +37,7 @@ call plug#begin()
     Plug 'airblade/vim-gitgutter'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-git'
-    Plug 'phleet/vim-mercenary'
+    "Plug 'phleet/vim-mercenary'
 
     " devel
     Plug 'fatih/vim-go'
@@ -416,7 +416,7 @@ if executable("ag")
 endif
 
 " PyMatcher for CtrlP
-if has('python')
+if has('python3') || has('python')
     let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 endif
 " Set delay to prevent extra search
