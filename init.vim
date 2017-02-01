@@ -18,7 +18,7 @@ call plug#begin()
     Plug 'scrooloose/nerdcommenter'
     Plug 'FelikZ/ctrlp-py-matcher'
     Plug 'ctrlpvim/ctrlp.vim'
-    Plug 'simnalamburt/vim-mundo'
+    Plug 'sjl/gundo.vim'
     Plug 'Raimondi/delimitMate'
     Plug 'terryma/vim-multiple-cursors'
     "Plug 'kassio/neoterm'
@@ -370,7 +370,9 @@ let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
 let g:UltiSnipsListSnippets="<c-h>"
 
 " [GM]undo
-map <Leader>u :MundoToggle<CR>
+let g:gundo_prefer_python3 = 1
+map <Leader>u :GundoToggle<CR>
+
 
 " neomake
 nmap <leader>b :<C-u>silent wa<CR>:Neomake!<CR>
