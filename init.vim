@@ -4,6 +4,7 @@ call plug#begin()
     " system
     Plug 's3rvac/AutoFenc'
     "Plug 'benekastah/neomake'
+    Plug 'skywind3000/asyncrun.vim'
 
     " appearance
     Plug 'andviro/NeoSolarized'
@@ -473,3 +474,6 @@ if !exists('g:deoplete#omni#input_patterns')
 endif
 "let g:deoplete#sources#clang#libclang_path = "/usr/lib/llvm-3.5/lib/libclang.so.1"
 "let g:deoplete#sources#clang#clang_header = "/usr/lib/llvm-3.5/include/"
+
+" AsyncRun
+command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
