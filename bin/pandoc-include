@@ -1,0 +1,53 @@
+#!/usr/bin/env python
+
+"""
+Pandoc filter to process code blocks with class "include" and
+replace their content with the included file
+"""
+
+import re
+from pandocfilters import toJSONFilter, CodeBlock
+
+
+def lookup(name, namevals):
+    for n in namevals:
+        if name in n:
+            return n
+    return None
+
+
+def idx(content, pat, startidx=None):
+    startidx = startidx or 0
+    for i in range(startidx, len(content)):
+        if re.match(pat, content[i]):
+            return i
+    return -1
+
+
+def removeCruft(l, cut):
+    l = l.rstrip()
+    if cut and l.endswith(cut[1]):
+        l = l[:-len(cut[1])]
+    return l
+
+
+def codeFilter(content, fro, to, cut):
+    startidx = idx(content, fro[1]) if fro is not None else 0
+    endidx = idx(content, to[1], startidx) if to is not None else len(content)
+    return [removeCruft(l, cut) for l in content[startidx:endidx + 1] if not re.match(' OMIT$', l)]
+
+
+def code_include(key, value, format, meta):
+    if key == 'CodeBlock':
+        [[ident, classes, namevals], code] = value
+        inc = lookup('include', namevals)
+        if inc is not None:
+            content = open(inc[1]).readlines()
+            fro = lookup('from', namevals)
+            to = lookup('to', namevals)
+            cut = lookup('cut', namevals)
+            return CodeBlock([ident, classes, namevals],
+                             u'\n'.join(codeFilter(content, fro, to, cut)))
+
+if __name__ == "__main__":
+    toJSONFilter(code_include)
