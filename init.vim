@@ -43,7 +43,8 @@ call plug#begin()
     " devel
     Plug 'fatih/vim-go'
     Plug 'metakirby5/codi.vim'
-    Plug 'maralla/validator.vim'
+    "Plug 'maralla/validator.vim'
+    Plug 'w0rp/ale'
     Plug 'maralla/completor.vim'
     Plug 'andviro/flake8-vim'
     Plug 'davidhalter/jedi-vim'
