@@ -476,4 +476,5 @@ endif
 "let g:deoplete#sources#clang#clang_header = "/usr/lib/llvm-3.5/include/"
 
 " AsyncRun
+let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
 command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
