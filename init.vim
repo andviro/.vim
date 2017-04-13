@@ -85,10 +85,6 @@ if has('syntax') && !exists('g:syntax_on')
 endif
 
 set clipboard+=unnamedplus
-set backupdir-=.
-if finddir(&backupdir) == ''
-    silent call mkdir(&backupdir, "p")
-endif
 set undofile
 set autoread
 set autowrite
