@@ -475,3 +475,25 @@ endif
 " AsyncRun
 let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
 command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
+
+" Codi
+let g:codi#interpreters = {
+   \ 'go': {
+       \ 'bin': 'gore',
+       \ 'prompt': '^\(gore>\|\.\+\) ',
+       \ },
+   \ }
+let g:codi#log="/tmp/codi.log"
+let g:codi#raw=1
+
+function s:AllowCodi()
+   if empty(glob('/tmp/cmd'))
+       call system('touch /tmp/cmd')
+   endif
+   call system('chmod u+x /tmp/cmd')
+endfunction
+augroup CodiAuto
+au!
+autocmd VimEnter * call s:AllowCodi()
+augroup END
+
