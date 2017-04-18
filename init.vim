@@ -441,7 +441,7 @@ let g:pandoc#modules#disabled = ["folding"]
 let g:pandoc#after#modules#enabled = ["ultisnips"]
 let g:pandoc#syntax#codeblocks#embeds#langs=['python','cpp','html','go']
 let g:pandoc#folding#fdc=0
-let g:pandoc#formatting#mode='hA'
+let g:pandoc#formatting#mode='h'
 let g:pandoc#folding#mode = 'stacked'
 
 " vim-easy-align
