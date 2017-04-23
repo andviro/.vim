@@ -84,7 +84,7 @@ if has('syntax') && !exists('g:syntax_on')
   syntax enable
 endif
 
-set clipboard+=unnamedplus
+set clipboard+=unnamedplus,unnamed
 set undofile
 set autoread
 set autowrite
@@ -117,6 +117,8 @@ set infercase
 set scrolloff=3
 set nostartofline
 set cursorline
+set colorcolumn=+1
+set textwidth=79
 
 
 " editing
@@ -137,8 +139,8 @@ set autoindent
 set smartindent
 set backspace=indent,eol,start
 set complete-=i
-set nrformats-=octal
-set formatoptions+=j " Delete comment character when joining commented lines
+"set nrformats-=octal
+set formatoptions=jcroql
 let mapleader = ";"
 
 " windows
@@ -284,10 +286,12 @@ au BufWritePost *.coffee CoffeeLint! | 5cwin
 augroup end
 
 " nerdcommenter
+let g:NERDCommentEmptyLines = 1
 vmap <silent> K <plug>NERDCommenterInvert
 let g:NERDCustomDelimiters = {
     \ 'spice': { 'left': '* ' },
     \ 'fsharp': { 'left': '// ' },
+    \ 'go': { 'left': '// ' },
     \ 'python': { 'left': '# ' },
     \ 'snippets': { 'left': '# ' },
     \ 'jinja': { 'left': '{# ', 'right': ' #}' }
@@ -436,7 +440,7 @@ let g:ctrlp_max_files = 0
 let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_frontmatter=1
 
-let g:pandoc#formatting#textwidth=100
+let g:pandoc#formatting#textwidth=79
 let g:pandoc#modules#disabled = ["folding"]
 let g:pandoc#after#modules#enabled = ["ultisnips"]
 let g:pandoc#syntax#codeblocks#embeds#langs=['python','cpp','html','go']
