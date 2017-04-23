@@ -3,12 +3,10 @@ scriptencoding utf-8
 call plug#begin()
     " system
     Plug 's3rvac/AutoFenc'
-    "Plug 'benekastah/neomake'
     Plug 'skywind3000/asyncrun.vim'
 
     " appearance
     Plug 'andviro/NeoSolarized'
-    "Plug 'lifepillar/vim-solarized8'
     Plug 'bling/vim-airline'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
@@ -22,7 +20,6 @@ call plug#begin()
     Plug 'sjl/gundo.vim'
     Plug 'Raimondi/delimitMate'
     Plug 'terryma/vim-multiple-cursors'
-    "Plug 'kassio/neoterm'
     Plug 'mtth/scratch.vim'
     Plug 'AndrewRadev/splitjoin.vim'
     Plug 'easymotion/vim-easymotion'
@@ -43,7 +40,6 @@ call plug#begin()
     " devel
     Plug 'fatih/vim-go'
     Plug 'metakirby5/codi.vim'
-    "Plug 'maralla/validator.vim'
     Plug 'w0rp/ale'
     Plug 'maralla/completor.vim'
     Plug 'andviro/flake8-vim'
@@ -51,13 +47,6 @@ call plug#begin()
     Plug 'kchmck/vim-coffee-script'
     Plug 'elzr/vim-json'
     Plug 'hynek/vim-python-pep8-indent'
-    "Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-completer --tern-completer' }
-    "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    "Plug 'Shougo/neoinclude.vim'
-    "Plug 'zchee/deoplete-clang'
-    "Plug 'Rip-Rip/clang_complete'
-    "Plug 'zchee/deoplete-jedi'
-    "Plug 'zchee/deoplete-go'
     Plug 'mtscout6/vim-cjsx'
     Plug 'leafgarland/typescript-vim'
     Plug 'amiorin/vim-fenced-code-blocks'
@@ -70,8 +59,6 @@ call plug#begin()
     Plug 'stephpy/vim-yaml'
     Plug 'chase/vim-ansible-yaml'
     Plug 'Chiel92/vim-autoformat'
-    "Plug 'rdnetto/YCM-Generator', {'branch' : 'stable'}
-    "Plug 'dylanaraps/taskrunner.nvim'
     Plug 'KabbAmine/zeavim.vim'
 call plug#end()
 
@@ -141,7 +128,7 @@ set backspace=indent,eol,start
 set complete-=i
 "set nrformats-=octal
 set formatoptions=jcroql
-let mapleader = ";"
+let g:mapleader = ';'
 
 " windows
 set splitbelow
@@ -166,21 +153,18 @@ set background=dark
 set display+=lastline
 let g:neosolarized_contrast='normal'
 let g:neosolarized_visibility='low'
-"colorscheme solarized8_dark
 colorscheme NeoSolarized
 hi ValidatorErrorSign ctermbg=0 cterm=bold ctermfg=88 term=standout
 hi ValidatorWarningSign ctermbg=0 cterm=bold ctermfg=3 term=standout
 let g:validator_permament_sign = 1
-"highlight NonText cterm=none ctermbg=none ctermfg=23
-"highlight SpecialKey cterm=none ctermbg=none ctermfg=23
 "
 " Load matchit.vim, but only if the user hasn't installed a newer version.
-if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &runtimepath) ==# ''
   runtime! macros/matchit.vim
 endif
 
 " Ctrl-space tweak
-if !has("gui_running")
+if !has('gui_running')
     map <C-@> <C-Space>
     imap <C-@> <C-Space>
     cmap <C-@> <C-Space>
@@ -212,11 +196,6 @@ nnoremap <silent> <CR> <C-]>
 nnoremap H <C-o>
 nnoremap L <C-i>
 
-" Neovim terminal
-if has("nvim")
-    tnoremap <A-q> <C-\><C-n><C-w>q
-endif
-
 " emacs-like insert mode
 cnoremap <C-A>      <Home>
 cnoremap <C-B>      <Left>
@@ -232,7 +211,7 @@ cnoremap <Esc><C-F> <S-Right>
 
 " utility functions
 fun! init#restore_cursor() 
-    if line("'\"") <= line("$")
+    if line('''"') <= line('$')
         silent! normal! g`"
         return 1
     endif
@@ -240,19 +219,19 @@ endfunction
 
 " from unite.vim plugin
 fun! init#projectDir() abort 
-    let parent = expand("%:p:h")
+    let l:parent = expand('%:p:h')
     while 1
-        for marker in ['.git', '.hg', '.svn']
-            let path = parent . '/' . marker
-            if isdirectory(path)
-              return fnamemodify(parent, ":~:.")
+        for l:marker in ['.git', '.hg', '.svn']
+            let l:path = l:parent . '/' . l:marker
+            if isdirectory(l:path)
+              return fnamemodify(l:parent, ':~:.')
             endif
         endfor
-        let next = fnamemodify(parent, ':h')
-        if next == parent
+        let l:next = fnamemodify(l:parent, ':h')
+        if l:next == l:parent
           return ''
         endif
-        let parent = next
+        let l:parent = l:next
     endwhile
 endfunction
 
@@ -274,7 +253,6 @@ au!
     au BufRead,BufNewFile *.txt setlocal ft=asciidoc
     au BufRead *.hva setlocal ft=tex
     au BufWrite *.html :Autoformat
-    "au BufWrite *.ts :Neomake
     au BufAdd,BufNewFile,BufRead * let b:base_project_dir = init#projectDir()
 augroup END
 
@@ -342,14 +320,14 @@ nmap <silent> <A-9> <Plug>AirlineSelectTab9
 
 " vim-skeleton
 let g:skeleton_replacements = {}
-let g:skeleton_template_dir = expand("<sfile>:p:h")."/templates"
+let g:skeleton_template_dir = expand('<sfile>:p:h').'/templates'
 
 function! g:skeleton_replacements.CLASS()
-    let l:filen = tolower(expand("%:t:r"))
-    return substitute(l:filen, "\\([a-zA-Z]\\+\\)", "\\u\\1\\e", "g")
+    let l:filen = tolower(expand('%:t:r'))
+    return substitute(l:filen, '\\([a-zA-Z]\\+\\)', '\\u\\1\\e', 'g')
 endfunction
 function! g:skeleton_replacements.NAME()
-    return tolower(expand("%:t:r"))
+    return tolower(expand('%:t:r'))
 endfunction
 
 " jedi
@@ -366,10 +344,10 @@ let g:ycm_extra_conf_globlist = ['~/dev/*','!~/*']
 let g:ycm_autoclose_preview_window_after_completion = 1
 inoremap <expr><c-j>  pumvisible() ? "\<C-n>" : "\<C-j>"
 inoremap <expr><c-k>  pumvisible() ? "\<C-p>" : "\<C-k>"
-let g:UltiSnipsExpandTrigger="<C-L>"
-let g:UltiSnipsJumpForwardTrigger="<Tab>"
-let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
-let g:UltiSnipsListSnippets="<c-h>"
+let g:UltiSnipsExpandTrigger='<C-L>'
+let g:UltiSnipsJumpForwardTrigger='<Tab>'
+let g:UltiSnipsJumpBackwardTrigger='<S-Tab>'
+let g:UltiSnipsListSnippets='<c-h>'
 
 " [GM]undo
 let g:gundo_prefer_python3 = 1
@@ -383,7 +361,6 @@ let g:neomake_place_signs=1
 let g:neomake_list_height=7
 
 " fugitive
-
 nmap <silent> <Leader>gs :Gstatus<CR>
 nmap <silent> <Leader>gc :Gcommit -v<CR>
 nmap <silent> <Leader>gC :Gcommit -a -v<CR>
@@ -416,7 +393,7 @@ let g:ctrlp_user_command = {
 \ }
 
 " If ag is available use it as filename list generator instead of 'find'
-if executable("ag")
+if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor
     let g:ctrlp_user_command['fallback'] = 'ag %s -i --nocolor --nogroup --ignore ''.git'' --ignore ''.DS_Store'' --ignore "vendor" --ignore ''node_modules'' --hidden -g ""'
 endif
@@ -436,13 +413,11 @@ let g:ctrlp_clear_cache_on_exit = 1
 let g:ctrlp_max_files = 0
 
 " vim-pandoc and markdown
-
 let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_frontmatter=1
-
 let g:pandoc#formatting#textwidth=79
-let g:pandoc#modules#disabled = ["folding"]
-let g:pandoc#after#modules#enabled = ["ultisnips"]
+let g:pandoc#modules#disabled = ['folding']
+let g:pandoc#after#modules#enabled = ['ultisnips']
 let g:pandoc#syntax#codeblocks#embeds#langs=['python','cpp','html','go']
 let g:pandoc#folding#fdc=0
 let g:pandoc#formatting#mode='h'
@@ -455,26 +430,18 @@ vmap <silent> <Bar> :EasyAlign*<Bar><CR>
 let g:neoterm_size = 7
 
 " vim-go
-"let g:go_fmt_command = "goimports"
+"let g:go_fmt_command = 'goimports'
 let g:go_def_mapping_enabled = 0
 
 " scratch
 let g:scratch_no_mappings = 1
-let g:scratch_filetype = "pandoc"
+let g:scratch_filetype = 'pandoc'
 let g:scratch_persistence_file = $HOME . '/Dropbox/notes.md'
 nmap gs <plug>(scratch-insert-reuse)
 
 " splitjoin
 let g:splitjoin_split_mapping = 'gS'
 let g:splitjoin_join_mapping  = 'gJ'
-
-" deoplete
-let g:deoplete#enable_at_startup = 1
-if !exists('g:deoplete#omni#input_patterns')
-  let g:deoplete#omni#input_patterns = {}
-endif
-"let g:deoplete#sources#clang#libclang_path = "/usr/lib/llvm-3.5/lib/libclang.so.1"
-"let g:deoplete#sources#clang#clang_header = "/usr/lib/llvm-3.5/include/"
 
 " AsyncRun
 let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
@@ -487,7 +454,7 @@ let g:codi#interpreters = {
        \ 'prompt': '^\(gore>\|\.\+\) ',
        \ },
    \ }
-let g:codi#log="/tmp/codi.log"
+let g:codi#log='/tmp/codi.log'
 let g:codi#raw=1
 
 function s:AllowCodi()
