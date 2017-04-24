@@ -71,7 +71,7 @@ if has('syntax') && !exists('g:syntax_on')
   syntax enable
 endif
 
-set clipboard=unnamedplus,unnamed
+set clipboard^=unnamed,unnamedplus
 set undofile
 set autoread
 set autowrite
