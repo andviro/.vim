@@ -60,6 +60,9 @@ call plug#begin()
     Plug 'chase/vim-ansible-yaml'
     Plug 'Chiel92/vim-autoformat'
     Plug 'KabbAmine/zeavim.vim'
+
+    " misc
+    Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 " system
@@ -294,29 +297,17 @@ if !exists('g:airline_symbols')
 let g:airline_symbols = {}
 endif
 " unicode symbols
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.whitespace = 'Ξ'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.linenr = ''
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#show_tabs = 1
 let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#tabline#enabled = 0
-let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_idx_mode = 0
 let g:airline#extensions#ctrlp#show_adjacent_modes = 1
 let g:airline_detect_iminsert=1
-nmap <silent> <A-1> <Plug>AirlineSelectTab1
-nmap <silent> <A-2> <Plug>AirlineSelectTab2
-nmap <silent> <A-3> <Plug>AirlineSelectTab3
-nmap <silent> <A-4> <Plug>AirlineSelectTab4
-nmap <silent> <A-5> <Plug>AirlineSelectTab5
-nmap <silent> <A-6> <Plug>AirlineSelectTab6
-nmap <silent> <A-7> <Plug>AirlineSelectTab7
-nmap <silent> <A-8> <Plug>AirlineSelectTab8
-nmap <silent> <A-9> <Plug>AirlineSelectTab9
 
 " vim-skeleton
 let g:skeleton_replacements = {}
