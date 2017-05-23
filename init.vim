@@ -87,6 +87,9 @@ set tabpagemax=50
 set viminfo^=!
 set sessionoptions-=options
 set nolazyredraw
+set backupdir-=.
+set undodir-=.
+set directory-=.
 
 " files
 set wildignore+=RCS,CVS,*~,*.aux,*.bak,*.dvi,*.toc
