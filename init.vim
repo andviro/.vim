@@ -62,7 +62,7 @@ call plug#begin()
     Plug 'KabbAmine/zeavim.vim'
 
     " misc
-    Plug 'ryanoasis/vim-devicons'
+    "Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 " system
@@ -167,6 +167,11 @@ let g:validator_permament_sign = 1
 " Load matchit.vim, but only if the user hasn't installed a newer version.
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &runtimepath) ==# ''
   runtime! macros/matchit.vim
+endif
+
+" GUI font
+if has('gui')
+    set guifont=RobotoMono\ Nerd\ Font\ 15
 endif
 
 " Ctrl-space tweak
@@ -300,7 +305,8 @@ if !exists('g:airline_symbols')
 let g:airline_symbols = {}
 endif
 " unicode symbols
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
+let g:airline_symbols_ascii = 1
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#show_tabs = 1
 let g:airline#extensions#tabline#show_buffers = 1
