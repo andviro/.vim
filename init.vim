@@ -3,7 +3,6 @@ scriptencoding utf-8
 call plug#begin()
     " system
     Plug 's3rvac/AutoFenc'
-    Plug 'skywind3000/asyncrun.vim'
 
     " appearance
     Plug 'andviro/NeoSolarized'
@@ -44,11 +43,7 @@ call plug#begin()
     Plug 'fatih/vim-go'
     Plug 'metakirby5/codi.vim'
     Plug 'w0rp/ale'
-    if has("nvim")
-        Plug 'roxma/nvim-completion-manager'
-    else
-        Plug 'maralla/completor.vim'
-    endif
+    Plug 'maralla/completor.vim'
     Plug 'andviro/flake8-vim'
     Plug 'davidhalter/jedi-vim'
     Plug 'kchmck/vim-coffee-script'
@@ -452,29 +447,3 @@ nmap gs <plug>(scratch-insert-reuse)
 " splitjoin
 let g:splitjoin_split_mapping = 'gS'
 let g:splitjoin_join_mapping  = 'gJ'
-
-" AsyncRun
-let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
-command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
-
-" Codi
-let g:codi#interpreters = {
-   \ 'go': {
-       \ 'bin': 'gore',
-       \ 'prompt': '^\(gore>\|\.\+\) ',
-       \ },
-   \ }
-let g:codi#log='/tmp/codi.log'
-let g:codi#raw=1
-
-function s:AllowCodi()
-   if empty(glob('/tmp/cmd'))
-       call system('touch /tmp/cmd')
-   endif
-   call system('chmod u+x /tmp/cmd')
-endfunction
-augroup CodiAuto
-au!
-autocmd VimEnter * call s:AllowCodi()
-augroup END
-
