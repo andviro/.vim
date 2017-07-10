@@ -11,6 +11,9 @@ call plug#begin()
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'wincent/terminus'
+    if has("nvim")
+        Plug 'kassio/neoterm'
+    endif
 
     " usability
     Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -41,7 +44,11 @@ call plug#begin()
     Plug 'fatih/vim-go'
     Plug 'metakirby5/codi.vim'
     Plug 'w0rp/ale'
-    Plug 'maralla/completor.vim'
+    if has("nvim")
+        Plug 'roxma/nvim-completion-manager'
+    else
+        Plug 'maralla/completor.vim'
+    endif
     Plug 'andviro/flake8-vim'
     Plug 'davidhalter/jedi-vim'
     Plug 'kchmck/vim-coffee-script'
@@ -219,6 +226,11 @@ cnoremap <C-N>      <Down>
 cnoremap <C-P>      <Up>
 cnoremap <Esc><C-B> <S-Left>
 cnoremap <Esc><C-F> <S-Right>
+
+" Neovim terminal
+if has("nvim")
+    tnoremap <Esc> <C-\><C-n>
+endif
 
 " utility functions
 fun! init#restore_cursor() 
