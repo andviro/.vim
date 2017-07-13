@@ -43,7 +43,11 @@ call plug#begin()
     Plug 'fatih/vim-go'
     Plug 'metakirby5/codi.vim'
     Plug 'w0rp/ale'
-    Plug 'maralla/completor.vim'
+    if has("nvim")
+        Plug 'roxma/nvim-completion-manager'
+    else
+        Plug 'maralla/completor.vim'
+    endif
     Plug 'andviro/flake8-vim'
     Plug 'davidhalter/jedi-vim'
     Plug 'kchmck/vim-coffee-script'
@@ -144,6 +148,10 @@ set noequalalways
 set helpheight=10
 set nowildmenu
 set completeopt-=preview
+set winwidth=100
+set winheight=8
+set winminheight=8
+set winheight=999
 
 " i18n
 set fileencodings=utf-8,cp1251,koi8-r
@@ -374,6 +382,10 @@ nmap <silent> <Leader>gA :Git add -A .<CR>
 nmap <silent> <Leader>gp :Git push -u origin HEAD<CR>
 nmap <silent> <Leader>gu :Git pull<CR>
 
+" neoterm
+if has("nvim")
+    nmap <silent> <Leader>r :TREPLSendFile<CR>
+endif
 
 " ctrlp
 let g:ctrlp_key_loop = 1
