@@ -149,8 +149,8 @@ set helpheight=10
 set nowildmenu
 set completeopt-=preview
 set winwidth=100
-set winheight=8
-set winminheight=8
+set winheight=5
+set winminheight=5
 set winheight=999
 
 " i18n
@@ -161,7 +161,9 @@ set iminsert=0
 set imsearch=-1
 
 " appearance
-set laststatus=1
+augroup vimappearance
+    au VimEnter * set laststatus=0
+augroup END
 set ruler
 set showcmd
 set wildmenu
