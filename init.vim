@@ -65,7 +65,9 @@ call plug#begin()
     Plug 'stephpy/vim-yaml'
     Plug 'chase/vim-ansible-yaml'
     Plug 'Chiel92/vim-autoformat'
-    Plug 'KabbAmine/zeavim.vim'
+    "Plug 'KabbAmine/zeavim.vim'
+    Plug 'tpope/vim-dispatch'
+    Plug 'janko-m/vim-test'
 
     " misc
     "Plug 'ryanoasis/vim-devicons'
@@ -293,12 +295,14 @@ augroup end
 
 " nerdcommenter
 let g:NERDCommentEmptyLines = 1
-vmap <silent> K <plug>NERDCommenterInvert
+let g:NERDRemoveExtraSpaces = 0
+let g:NERDSpaceDelims = 1
+let g:NERDDefaultAlign = 'start'
+let g:NERDDefaultNesting = 1
+vmap <silent> K <plug>NERDCommenterToggle
 let g:NERDCustomDelimiters = {
     \ 'spice': { 'left': '* ' },
     \ 'fsharp': { 'left': '// ' },
-    \ 'go': { 'left': '// ' },
-    \ 'python': { 'left': '# ' },
     \ 'snippets': { 'left': '# ' },
     \ 'jinja': { 'left': '{# ', 'right': ' #}' }
 \ }
@@ -461,3 +465,11 @@ nmap gs <plug>(scratch-insert-reuse)
 " splitjoin
 let g:splitjoin_split_mapping = 'gS'
 let g:splitjoin_join_mapping  = 'gJ'
+
+" vim-test
+let test#strategy = 'make'
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
