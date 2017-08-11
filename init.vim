@@ -17,8 +17,10 @@ call plug#begin()
     " usability
     Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'scrooloose/nerdcommenter'
-    Plug 'FelikZ/ctrlp-py-matcher'
-    Plug 'ctrlpvim/ctrlp.vim'
+"     Plug 'FelikZ/ctrlp-py-matcher'
+"     Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
     Plug 'sjl/gundo.vim'
     Plug 'Raimondi/delimitMate'
     Plug 'terryma/vim-multiple-cursors'
@@ -236,7 +238,7 @@ cnoremap <Esc><C-F> <S-Right>
 
 " Neovim terminal
 if has("nvim")
-    tnoremap <Esc> <C-\><C-n>
+    tnoremap <C-A><Esc> <C-\><C-n>
 endif
 
 " utility functions
@@ -473,3 +475,22 @@ nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
+
+" fzf
+let g:fzf_command_prefix = 'FZF'
+let g:fzf_horizontal = { 'window': 'belowright 10new' }
+let g:fzf_vertical = { 'window': 'vertical aboveleft 50new' }
+let g:fzf_layout = g:fzf_vertical
+
+let g:fzf_layout["options"] = "--tiebreak=length,end"
+let g:relpath_cmd = resolve(printf("%s/bin/relpath", expand("<sfile>:p:h")))
+let g:ag_cmd = 'ag --ignore ".git" --ignore ".hg" --ignore "vendor" --follow --nocolor --nogroup --hidden -g "" '
+fun! init#agProject(base, ...)
+    let l:res ={'source': g:ag_cmd . a:base . ' | ' . g:relpath_cmd . ' ' . expand("%:p:h")}
+    for eopts in a:000
+        call extend(l:res, eopts)
+    endfor
+    return l:res
+endfun
+
+nnoremap <silent> <C-P> :<C-u>call fzf#vim#files("", init#agProject(b:base_project_dir, g:fzf_layout))<CR>
