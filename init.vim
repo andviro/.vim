@@ -152,10 +152,6 @@ set noequalalways
 set helpheight=10
 set nowildmenu
 set completeopt-=preview
-set winwidth=100
-set winheight=5
-set winminheight=5
-set winheight=999
 
 " i18n
 set fileencodings=utf-8,cp1251,koi8-r
