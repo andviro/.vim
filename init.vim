@@ -162,7 +162,7 @@ set imsearch=-1
 
 " appearance
 augroup vimappearance
-    au VimEnter * set laststatus=0
+    au VimEnter * set laststatus=2
 augroup END
 set ruler
 set showcmd
