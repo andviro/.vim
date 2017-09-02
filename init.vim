@@ -419,6 +419,15 @@ nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 
+" If ag is available use it as filename list generator instead of 'find'
+if executable('ag')
+    let s:find_prg = 'ag --ignore .git --ignore .hg --ignore vendor --ignore node_modules --follow --nocolor --nogroup --hidden'
+    exec "set grepprg=" . escape(s:find_prg . " --vimgrep", ' "')
+    set grepformat=%f:%l:%c:%m
+else
+    let s:find_prg = 'find'
+endif
+
 " fzf
 let g:fzf_command_prefix = 'FZF'
 let g:fzf_horizontal = { 'window': 'belowright 10new' }
@@ -427,9 +436,9 @@ let g:fzf_layout = g:fzf_horizontal
 
 let g:fzf_layout["options"] = "--tiebreak=length,end"
 let g:relpath_cmd = resolve(printf("%s/bin/relpath", expand("<sfile>:p:h")))
-let g:ag_cmd = 'ag --ignore ".git" --ignore ".hg" --ignore "vendor" --follow --nocolor --nogroup --hidden -g "" '
+
 fun! init#agProject(base, ...)
-    let l:res ={'source': g:ag_cmd . a:base . ' | ' . g:relpath_cmd . ' ' . expand("%:p:h")}
+    let l:res ={'source': s:find_prg . ' -g "" '. a:base . ' | ' . g:relpath_cmd . ' ' . expand("%:p:h")}
     for eopts in a:000
         call extend(l:res, eopts)
     endfor
