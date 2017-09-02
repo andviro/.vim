@@ -391,59 +391,6 @@ if has("nvim")
     nmap <silent> <Leader>r :TREPLSendFile<CR>
 endif
 
-" ctrlp
-let g:ctrlp_key_loop = 1
-let g:ctrlp_by_filename = 0
-let g:ctrlp_match_window_reversed = 0
-let g:ctrlp_reuse_window = 'netrw\|quickfix'
-let g:ctrlp_extensions = ['session']
-let g:ctrlp_working_path_mode = 'r'
-let g:ctrlp_custom_ignore = {
-\ 'dir':  '\v[\/](\.git|\.hg|\.svn|bower_components|node_modules|vendor)$'
-\ }
-let g:ctrlp_cmd = 'CtrlPLastMode'
-let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:10,results:10000'
-"let g:ctrlp_default_input = 0
-
-let g:ctrlp_user_command = {
-\ 'types': {
-  \ 1: ['.git', 'cd %s && git ls-files -c -o --exclude-standard .'],
-  \ 2: ['.hg', 'hg --cwd %s status -numac -I . $(hg root)'],
-  \ },
-\ 'fallback': 'find %s -type f'
-\ }
-
-" If ag is available use it as filename list generator instead of 'find'
-if executable('ag')
-    set grepprg=ag\ --nogroup\ --nocolor
-    let g:ctrlp_user_command['fallback'] = 'ag %s -i --nocolor --nogroup --ignore ''.git'' --ignore ''.DS_Store'' --ignore "vendor" --ignore ''node_modules'' --hidden -g ""'
-endif
-
-" PyMatcher for CtrlP
-if has('python3') || has('python')
-    let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-endif
-" Set delay to prevent extra search
-let g:ctrlp_lazy_update = 1
-
-" Do not clear filenames cache, to improve CtrlP startup
-" You can manualy clear it by <F5>
-let g:ctrlp_clear_cache_on_exit = 1
-
-" Set no file limit, we are building a big project
-let g:ctrlp_max_files = 0
-
-" vim-pandoc and markdown
-let g:vim_markdown_folding_disabled=1
-let g:vim_markdown_frontmatter=1
-let g:pandoc#formatting#textwidth=79
-let g:pandoc#modules#disabled = ['folding']
-let g:pandoc#after#modules#enabled = ['ultisnips']
-let g:pandoc#syntax#codeblocks#embeds#langs=['python','cpp','html','go']
-let g:pandoc#folding#fdc=0
-let g:pandoc#formatting#mode='h'
-let g:pandoc#folding#mode = 'stacked'
-
 " vim-easy-align
 vmap <silent> <Bar> :EasyAlign*<Bar><CR>
 
