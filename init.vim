@@ -476,7 +476,7 @@ nmap <silent> <leader>g :TestVisit<CR>
 let g:fzf_command_prefix = 'FZF'
 let g:fzf_horizontal = { 'window': 'belowright 10new' }
 let g:fzf_vertical = { 'window': 'vertical aboveleft 50new' }
-let g:fzf_layout = g:fzf_vertical
+let g:fzf_layout = g:fzf_horizontal
 
 let g:fzf_layout["options"] = "--tiebreak=length,end"
 let g:relpath_cmd = resolve(printf("%s/bin/relpath", expand("<sfile>:p:h")))
