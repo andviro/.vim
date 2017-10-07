@@ -12,6 +12,7 @@ call plug#begin()
     Plug 'wincent/terminus'
     if has("nvim")
         Plug 'kassio/neoterm'
+        let g:neoterm_autoinsert = 1
     endif
 
     " usability
@@ -400,6 +401,16 @@ let g:neoterm_size = 7
 " vim-go
 "let g:go_fmt_command = 'goimports'
 let g:go_def_mapping_enabled = 0
+let g:go_def_reuse_buffer = 1
+let g:go_term_mode = "split"
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
 
 " scratch
 let g:scratch_no_mappings = 1
@@ -433,8 +444,7 @@ let g:fzf_command_prefix = 'FZF'
 let g:fzf_horizontal = { 'window': 'belowright 10new' }
 let g:fzf_vertical = { 'window': 'vertical aboveleft 50new' }
 let g:fzf_layout = g:fzf_horizontal
-
-let g:fzf_layout["options"] = "--tiebreak=length,end"
+let g:fzf_extra_opts = {'options': '--tiebreak=length,end'}
 let g:relpath_cmd = resolve(printf("%s/bin/relpath", expand("<sfile>:p:h")))
 
 fun! init#agProject(base, ...)
@@ -445,4 +455,4 @@ fun! init#agProject(base, ...)
     return l:res
 endfun
 
-nnoremap <silent> <C-P> :<C-u>call fzf#vim#files("", init#agProject(b:base_project_dir, g:fzf_layout))<CR>
+nnoremap <silent> <C-P> :<C-u>call fzf#vim#files("", init#agProject(b:base_project_dir, g:fzf_layout, g:fzf_extra_opts))<CR>

@@ -8,8 +8,10 @@ nmap <buffer> <leader>r <Plug>(go-run)
 nmap <buffer> <CR> <Plug>(go-def)
 "nmap <buffer> <leader>n <Plug>(go-referrers)
 nmap <buffer> <leader>R <Plug>(go-rename)
+nmap <buffer> <C-J> :<C-u>GoDeclsDir<CR>
 "nmap <buffer> <leader>e <Plug>(go-generate)
 "nmap <buffer> <leader>m <Plug>(go-implements)
 "nmap <buffer> <leader>i :GoImports<CR>
 "inoremap <silent> <buffer> . .<C-x><C-o>
 "inoremap <silent> <buffer> ( <C-x><C-o>(
+"
