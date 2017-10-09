@@ -399,7 +399,7 @@ vmap <silent> <Bar> :EasyAlign*<Bar><CR>
 let g:neoterm_size = 7
 
 " vim-go
-"let g:go_fmt_command = 'goimports'
+let g:go_fmt_command = 'goimports'
 let g:go_def_mapping_enabled = 0
 let g:go_def_reuse_buffer = 1
 let g:go_term_mode = "split"
@@ -411,6 +411,7 @@ let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
+let g:go_auto_type_info = 1
 
 " scratch
 let g:scratch_no_mappings = 1
