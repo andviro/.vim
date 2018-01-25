@@ -6,6 +6,8 @@ call plug#begin()
 
     " appearance
     Plug 'andviro/NeoSolarized'
+    Plug 'jnurmine/Zenburn'
+    Plug 'morhetz/gruvbox'
     Plug 'bling/vim-airline'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
@@ -172,7 +174,10 @@ set background=dark
 set display+=lastline
 let g:neosolarized_contrast='normal'
 let g:neosolarized_visibility='low'
-colorscheme NeoSolarized
+let g:gruvbox_contrast_dark='soft'
+" colorscheme NeoSolarized
+" colorscheme zenburn
+colorscheme gruvbox
 hi ValidatorErrorSign ctermbg=0 cterm=bold ctermfg=88 term=standout
 hi ValidatorWarningSign ctermbg=0 cterm=bold ctermfg=3 term=standout
 let g:validator_permament_sign = 1
