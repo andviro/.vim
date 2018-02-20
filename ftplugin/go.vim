@@ -1,4 +1,4 @@
-setlocal ts=4 sw=4 list noet
+setlocal ts=4 sw=4 nolist noet nonu
 nmap <buffer> K <Plug>(go-doc)
 nmap <buffer> <leader>r <Plug>(go-run)
 "nmap <buffer> <leader>l <Plug>(go-metalinter)

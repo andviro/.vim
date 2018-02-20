@@ -11,6 +11,7 @@ call plug#begin()
     Plug 'bling/vim-airline'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
+    Plug 'junegunn/limelight.vim'
     Plug 'wincent/terminus'
     if has("nvim")
         Plug 'kassio/neoterm'
@@ -122,8 +123,8 @@ set infercase
 "navigation
 set scrolloff=3
 set nostartofline
-set cursorline
-set colorcolumn=+1
+" set cursorline
+" set colorcolumn=+1
 set textwidth=79
 
 
@@ -165,7 +166,7 @@ set imsearch=-1
 
 " appearance
 augroup vimappearance
-    au VimEnter * set laststatus=2
+    au VimEnter * set laststatus=1
 augroup END
 set ruler
 set showcmd
@@ -416,7 +417,7 @@ let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
-let g:go_auto_type_info = 1
+let g:go_auto_type_info = 0
 
 " scratch
 let g:scratch_no_mappings = 1
@@ -444,6 +445,12 @@ if executable('ag')
 else
     let s:find_prg = 'find'
 endif
+
+" limelight
+let g:limelight_conceal_ctermfg = 'gray'
+
+" ale
+let g:ale_sign_column_always = 1
 
 " fzf
 let g:fzf_command_prefix = 'FZF'
