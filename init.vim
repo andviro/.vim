@@ -425,6 +425,9 @@ let g:scratch_filetype = 'pandoc'
 let g:scratch_persistence_file = $HOME . '/Dropbox/notes.md'
 nmap gs <plug>(scratch-insert-reuse)
 
+" markdown
+let g:pandoc#formatting#textwidth = 79
+
 " splitjoin
 let g:splitjoin_split_mapping = 'gS'
 let g:splitjoin_join_mapping  = 'gJ'
