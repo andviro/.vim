@@ -123,8 +123,8 @@ set infercase
 "navigation
 set scrolloff=3
 set nostartofline
-" set cursorline
-" set colorcolumn=+1
+set nocursorline
+set colorcolumn=
 set textwidth=79
 
 
