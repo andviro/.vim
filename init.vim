@@ -176,9 +176,9 @@ set display+=lastline
 let g:neosolarized_contrast='normal'
 let g:neosolarized_visibility='low'
 let g:gruvbox_contrast_dark='soft'
-" colorscheme NeoSolarized
+colorscheme NeoSolarized
 " colorscheme zenburn
-colorscheme gruvbox
+" colorscheme gruvbox
 hi ValidatorErrorSign ctermbg=0 cterm=bold ctermfg=88 term=standout
 hi ValidatorWarningSign ctermbg=0 cterm=bold ctermfg=3 term=standout
 let g:validator_permament_sign = 1
@@ -418,6 +418,10 @@ let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
 let g:go_auto_type_info = 0
+augroup vimGoPost
+au!
+au BufWritePost *.go :GoVet!
+augroup end
 
 " scratch
 let g:scratch_no_mappings = 1
@@ -454,6 +458,7 @@ let g:limelight_conceal_ctermfg = 'gray'
 
 " ale
 let g:ale_sign_column_always = 1
+let g:ale_linters = {'go': ['gofmt', 'golint']}
 
 " fzf
 let g:fzf_command_prefix = 'FZF'

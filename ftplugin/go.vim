@@ -14,4 +14,3 @@ nmap <buffer> <C-J> :<C-u>GoDeclsDir<CR>
 "nmap <buffer> <leader>i :GoImports<CR>
 "inoremap <silent> <buffer> . .<C-x><C-o>
 "inoremap <silent> <buffer> ( <C-x><C-o>(
-"
