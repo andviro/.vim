@@ -33,6 +33,10 @@ call plug#begin()
     Plug 'easymotion/vim-easymotion'
     Plug 'fabi1cazenave/suckless.vim'
     Plug 'kshenoy/vim-signature'
+    Plug 'francoiscabrol/ranger.vim'
+    if has("nvim")
+        Plug 'rbgrouleff/bclose.vim'
+    endif
     
     " snippets
     Plug 'sirver/ultisnips'
