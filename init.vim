@@ -25,6 +25,7 @@ call plug#begin()
 "     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
+    Plug 'junegunn/vim-emoji'
     Plug 'sjl/gundo.vim'
     Plug 'Raimondi/delimitMate'
     Plug 'terryma/vim-multiple-cursors'
