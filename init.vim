@@ -247,6 +247,12 @@ cnoremap <Esc><C-F> <S-Right>
 " Neovim terminal
 if has("nvim")
     tnoremap <C-A><Esc> <C-\><C-n>
+    highlight TermCursor ctermfg=green ctermbg=black guifg=green
+    augroup NVimTerm
+        au!
+        au BufEnter term://* silent! startinsert
+        au BufLeave term://* silent! stopinsert
+    augroup end
 endif
 
 " utility functions
@@ -401,13 +407,13 @@ nmap <silent> <Leader>gu :Git pull<CR>
 " neoterm
 if has("nvim")
     nmap <silent> <Leader>r :TREPLSendFile<CR>
+    let g:neoterm_size = 7
+    let g:neoterm_autoinsert = 1
 endif
 
 " vim-easy-align
 vmap <silent> <Bar> :EasyAlign*<Bar><CR>
 
-" Neoterm
-let g:neoterm_size = 7
 
 " vim-go
 let g:go_fmt_command = 'goimports'
