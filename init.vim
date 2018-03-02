@@ -247,11 +247,11 @@ cnoremap <Esc><C-F> <S-Right>
 " Neovim terminal
 if has("nvim")
     tnoremap <C-A><Esc> <C-\><C-n>
-    highlight TermCursor ctermfg=green ctermbg=black guifg=green
+    highlight TermCursor ctermfg=green guifg=green
     augroup NVimTerm
         au!
-        au BufEnter term://* silent! startinsert
-        au BufLeave term://* silent! stopinsert
+        au TermOpen * startinsert
+        au BufLeave term://* stopinsert
     augroup end
 endif
 
