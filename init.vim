@@ -183,10 +183,11 @@ set display+=lastline
 let g:neosolarized_contrast='normal'
 let g:neosolarized_visibility='low'
 let g:gruvbox_contrast_dark='soft'
-colorscheme parsec
-" colorscheme NeoSolarized
+let g:zenburn_old_Visual = 1
 " colorscheme zenburn
-" colorscheme gruvbox
+" colorscheme parsec
+" colorscheme NeoSolarized
+colorscheme gruvbox
 hi ValidatorErrorSign ctermbg=0 cterm=bold ctermfg=88 term=standout
 hi ValidatorWarningSign ctermbg=0 cterm=bold ctermfg=3 term=standout
 let g:validator_permament_sign = 1
