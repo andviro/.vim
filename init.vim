@@ -12,10 +12,12 @@ call plug#begin()
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'junegunn/limelight.vim'
+    Plug 'chase/focuspoint-vim'
+    Plug 'keith/parsec.vim'
+    Plug 'reedes/vim-colors-pencil'
     Plug 'wincent/terminus'
     if has("nvim")
         Plug 'kassio/neoterm'
-        let g:neoterm_autoinsert = 1
     endif
 
     " usability
@@ -181,7 +183,8 @@ set display+=lastline
 let g:neosolarized_contrast='normal'
 let g:neosolarized_visibility='low'
 let g:gruvbox_contrast_dark='soft'
-colorscheme NeoSolarized
+colorscheme parsec
+" colorscheme NeoSolarized
 " colorscheme zenburn
 " colorscheme gruvbox
 hi ValidatorErrorSign ctermbg=0 cterm=bold ctermfg=88 term=standout
@@ -408,7 +411,7 @@ nmap <silent> <Leader>gu :Git pull<CR>
 if has("nvim")
     nmap <silent> <Leader>r :TREPLSendFile<CR>
     let g:neoterm_size = 7
-    let g:neoterm_autoinsert = 1
+    let g:neoterm_autoinsert = 0
 endif
 
 " vim-easy-align
@@ -442,6 +445,7 @@ nmap gs <plug>(scratch-insert-reuse)
 
 " markdown
 let g:pandoc#formatting#textwidth = 79
+let g:pandoc#formatting#mode = "hA"
 
 " splitjoin
 let g:splitjoin_split_mapping = 'gS'
