@@ -421,6 +421,7 @@ vmap <silent> <Bar> :EasyAlign*<Bar><CR>
 
 " vim-go
 let g:go_fmt_command = 'goimports'
+let g:go_fmt_fail_silently = 1
 let g:go_def_mapping_enabled = 0
 let g:go_def_reuse_buffer = 1
 let g:go_term_mode = "split"
@@ -433,9 +434,9 @@ let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
 let g:go_auto_type_info = 0
-augroup vimGoPost
+augroup vimGo
 au!
-au BufWritePost *.go :GoVet!
+au BufWritePost *.go silent! GoVet
 augroup end
 
 " scratch
@@ -474,7 +475,12 @@ let g:limelight_conceal_ctermfg = 'gray'
 
 " ale
 let g:ale_sign_column_always = 1
-let g:ale_linters = {'go': ['gofmt', 'golint']}
+let g:ale_linters = {'go': ['golint']}
+let g:ale_keep_list_window_open = 0
+let g:ale_open_list = 0
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 0
+
 
 " fzf
 let g:fzf_command_prefix = 'FZF'
