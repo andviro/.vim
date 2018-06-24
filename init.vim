@@ -423,7 +423,7 @@ vmap <silent> <Bar> :EasyAlign*<Bar><CR>
 let g:go_fmt_command = 'goimports'
 let g:go_fmt_fail_silently = 1
 let g:go_def_mapping_enabled = 0
-let g:go_def_reuse_buffer = 1
+" let g:go_def_reuse_buffer = 1
 let g:go_term_mode = "split"
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
@@ -434,9 +434,9 @@ let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
 let g:go_auto_type_info = 0
-augroup vimGo
+augroup VimGo_Post
 au!
-au BufWritePost *.go silent! GoVet
+au BufWritePost *.go :silent! GoVet!
 augroup end
 
 " scratch
