@@ -126,13 +126,19 @@ set ignorecase
 set incsearch
 set nohlsearch
 set infercase
+set magic
+set showmatch
+set mat=2
 
 "navigation
 set scrolloff=3
 set nostartofline
-set nocursorline
-set colorcolumn=
+set cursorline
+set colorcolumn=80,120
 set textwidth=79
+if has('mouse')
+    set mouse=a
+endif
 
 
 " editing
@@ -151,7 +157,7 @@ set smarttab
 set virtualedit=block
 set autoindent
 set smartindent
-set backspace=indent,eol,start
+set backspace=eol,start,indent
 set complete-=i
 "set nrformats-=octal
 set formatoptions=jcroql
@@ -161,8 +167,9 @@ let g:mapleader = ';'
 set splitbelow
 set noequalalways
 set helpheight=10
-set nowildmenu
-set completeopt-=preview
+set wildmenu
+set completeopt=longest,menuone
+set wildmode=list:longest,full
 
 " i18n
 set fileencodings=utf-8,cp1251,koi8-r
@@ -178,6 +185,7 @@ augroup END
 set ruler
 set showcmd
 set wildmenu
+set foldcolumn=0
 set background=dark
 set display+=lastline
 let g:neosolarized_contrast='normal'
@@ -221,6 +229,7 @@ nmap <silent> <C-/> :let &l:iminsert = !&l:iminsert<CR>
 nmap <silent> <C-_> :let &l:iminsert = !&l:iminsert<CR>
 nmap <silent> <C-Space> :let &l:iminsert = !&l:iminsert<CR>
 
+
 " general key bindings
 nnoremap <silent> <C-j> :tabprev<CR>
 nnoremap <silent> <C-k> :tabnext<CR>
@@ -247,6 +256,10 @@ cnoremap <C-N>      <Down>
 cnoremap <C-P>      <Up>
 cnoremap <Esc><C-B> <S-Left>
 cnoremap <Esc><C-F> <S-Right>
+
+" This is totally awesome - remap jj to escape in insert mode.  You'll never
+" type jj anyway, so it's great!
+inoremap jj <esc> 
 
 " Neovim terminal
 if has("nvim")
