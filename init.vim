@@ -29,7 +29,8 @@ call plug#begin()
     Plug 'junegunn/fzf.vim'
     Plug 'junegunn/vim-emoji'
     Plug 'sjl/gundo.vim'
-    Plug 'Raimondi/delimitMate'
+"     Plug 'Raimondi/delimitMate'
+    Plug 'jiangmiao/auto-pairs'
     Plug 'terryma/vim-multiple-cursors'
     Plug 'mtth/scratch.vim'
     Plug 'AndrewRadev/splitjoin.vim'
@@ -257,10 +258,6 @@ cnoremap <C-P>      <Up>
 cnoremap <Esc><C-B> <S-Left>
 cnoremap <Esc><C-F> <S-Right>
 
-" This is totally awesome - remap jj to escape in insert mode.  You'll never
-" type jj anyway, so it's great!
-inoremap jj <esc> 
-
 " Neovim terminal
 if has("nvim")
     tnoremap <C-A><Esc> <C-\><C-n>
@@ -461,6 +458,8 @@ nmap gs <plug>(scratch-insert-reuse)
 " markdown
 let g:pandoc#formatting#textwidth = 79
 let g:pandoc#formatting#mode = "hA"
+let g:pandoc#folding#mode = "stacked"
+let g:pandoc#folding#fdc = 0
 
 " splitjoin
 let g:splitjoin_split_mapping = 'gS'
