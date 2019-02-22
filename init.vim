@@ -12,6 +12,7 @@ call plug#begin()
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'junegunn/limelight.vim'
+    Plug 'bilalq/lite-dfm'
     Plug 'chase/focuspoint-vim'
     Plug 'keith/parsec.vim'
     Plug 'reedes/vim-colors-pencil'
@@ -29,8 +30,8 @@ call plug#begin()
     Plug 'junegunn/fzf.vim'
     Plug 'junegunn/vim-emoji'
     Plug 'sjl/gundo.vim'
-"     Plug 'Raimondi/delimitMate'
-    Plug 'jiangmiao/auto-pairs'
+    Plug 'Raimondi/delimitMate'
+"     Plug 'jiangmiao/auto-pairs'
     Plug 'terryma/vim-multiple-cursors'
     Plug 'mtth/scratch.vim'
     Plug 'AndrewRadev/splitjoin.vim'
@@ -114,7 +115,7 @@ set undodir-=.
 set directory-=.
 
 " files
-set wildignore+=RCS,CVS,*~,*.aux,*.bak,*.dvi,*.toc
+set wildignore+=RCS,CVS,*~,*.aux,*.bak,*.dvi,*.toc,*.pdf
 set wildignore+=*.idx,*.log,*.swp,*.tar,*.o,*.cm?,*.d
 set wildignore+=*.haux,*.htoc,*.image.tex,*.pyc,*.out,*\\,v
 set wildignore+=*.bbl,*.blg,*.out
@@ -257,6 +258,10 @@ cnoremap <C-N>      <Down>
 cnoremap <C-P>      <Up>
 cnoremap <Esc><C-B> <S-Left>
 cnoremap <Esc><C-F> <S-Right>
+
+" mitigate insert-mode hell
+inoremap <c-u> <c-g>u<c-u>
+inoremap <c-w> <c-g>u<c-w>
 
 " Neovim terminal
 if has("nvim")
@@ -456,7 +461,7 @@ let g:scratch_persistence_file = $HOME . '/Dropbox/notes.md'
 nmap gs <plug>(scratch-insert-reuse)
 
 " markdown
-let g:pandoc#formatting#textwidth = 79
+let g:pandoc#formatting#textwidth = 72
 let g:pandoc#formatting#mode = "hA"
 let g:pandoc#folding#mode = "stacked"
 let g:pandoc#folding#fdc = 0
@@ -512,3 +517,7 @@ fun! init#agProject(base, ...)
 endfun
 
 nnoremap <silent> <C-P> :<C-u>call fzf#vim#files("", init#agProject(b:base_project_dir, g:fzf_layout, g:fzf_extra_opts))<CR>
+
+" lite DFM
+"
+let g:lite_dfm_left_offset = 10
