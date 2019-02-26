@@ -31,7 +31,6 @@ call plug#begin()
     Plug 'junegunn/vim-emoji'
     Plug 'sjl/gundo.vim'
     Plug 'Raimondi/delimitMate'
-"     Plug 'jiangmiao/auto-pairs'
     Plug 'terryma/vim-multiple-cursors'
     Plug 'mtth/scratch.vim'
     Plug 'AndrewRadev/splitjoin.vim'
