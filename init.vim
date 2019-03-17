@@ -282,18 +282,24 @@ fun! init#restore_cursor()
 endfunction 
 
 " from unite.vim plugin
-fun! init#projectDir() abort 
+fun! init#setupProjectDir() abort 
     let l:parent = expand('%:p:h')
+    let b:is_git = 0
+    let b:base_project_dir = l:parent
+    let b:find_prg = s:find_prg
     while 1
         for l:marker in ['.git', '.hg', '.svn']
             let l:path = l:parent . '/' . l:marker
             if isdirectory(l:path)
-              return fnamemodify(l:parent, ':~:.')
+                let b:is_git = 1
+                let b:base_project_dir = fnamemodify(l:parent, ':~:.')
+                let b:find_prg = "git ls-files -c -o --exclude-standard -- "
+                return
             endif
         endfor
         let l:next = fnamemodify(l:parent, ':h')
         if l:next == l:parent
-          return ''
+          return
         endif
         let l:parent = l:next
     endwhile
@@ -317,7 +323,7 @@ au!
     au BufRead,BufNewFile *.txt setlocal ft=asciidoc
     au BufRead *.hva setlocal ft=tex
     au BufWrite *.html :Autoformat
-    au BufAdd,BufNewFile,BufRead * let b:base_project_dir = init#projectDir()
+    au BufAdd,BufNewFile,BufRead * call init#setupProjectDir()
 augroup END
 
 " coffeescript
@@ -479,7 +485,7 @@ nmap <silent> <leader>g :TestVisit<CR>
 
 " If ag is available use it as filename list generator instead of 'find'
 if executable('ag')
-    let s:find_prg = 'ag --ignore .git --ignore .hg --ignore vendor --ignore node_modules --follow --nocolor --nogroup --hidden'
+    let s:find_prg = 'ag --skip-vcs-ignores --ignore .git --ignore .hg --ignore vendor --ignore node_modules --follow --nocolor --nogroup --hidden -g ""'
     exec "set grepprg=" . escape(s:find_prg . " --vimgrep", ' "')
     set grepformat=%f:%l:%c:%m
 else
@@ -508,7 +514,11 @@ let g:fzf_extra_opts = {'options': '--tiebreak=length,end'}
 let g:relpath_cmd = resolve(printf("%s/bin/relpath", expand("<sfile>:p:h")))
 
 fun! init#agProject(base, ...)
-    let l:res ={'source': s:find_prg . ' -g "" '. a:base . ' | ' . g:relpath_cmd . ' ' . expand("%:p:h")}
+    let l:find_prg = b:find_prg . a:base
+    if l:find_prg =~ "git"
+        let l:find_prg = l:find_prg . " ':!:vendor' ':!:node_modules'"
+    endif
+    let l:res ={'source': l:find_prg . ' | ' . g:relpath_cmd . ' ' . expand("%:p:h")}
     for eopts in a:000
         call extend(l:res, eopts)
     endfor
