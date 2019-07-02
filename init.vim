@@ -509,7 +509,7 @@ let g:fzf_command_prefix = 'FZF'
 let g:fzf_horizontal = { 'window': 'belowright 10new' }
 let g:fzf_vertical = { 'window': 'vertical aboveleft 50new' }
 let g:fzf_layout = g:fzf_horizontal
-let g:fzf_extra_opts = {'options': '--tiebreak=length,end --preview="head {}"'}
+let g:fzf_extra_opts = {'options': '--tiebreak=length,end --preview="bat --style=plain --color=always {}"'}
 " let g:fzf_extra_opts = {'options': '--tiebreak=length,end'}
 let g:relpath_cmd = resolve(printf("%s/bin/relpath", expand("<sfile>:p:h")))
 
