@@ -108,7 +108,7 @@ set history=1000
 set tabpagemax=50
 set viminfo^=!
 set sessionoptions-=options
-set nolazyredraw
+set lazyredraw
 set backupdir-=.
 set undodir-=.
 set directory-=.
@@ -235,7 +235,7 @@ nmap <silent> <C-Space> :let &l:iminsert = !&l:iminsert<CR>
 nnoremap <silent> <C-j> :tabprev<CR>
 nnoremap <silent> <C-k> :tabnext<CR>
 nnoremap <silent> <M-l> :nohlsearch<CR><C-L>
-nnoremap <silent> <Tab> :b#<CR>
+" nnoremap <silent> <Tab> :b#<CR>
 map <Space> <C-D>
 nnoremap <BS> <C-O>
 nnoremap <silent> <C-l> :bnext<CR>
@@ -320,7 +320,7 @@ au!
     au BufNewFile,BufRead *.json setf javascript
     au BufNewFile,BufRead *.j2 setlocal ft=jinja
     au BufNewFile,BufRead *.tag setlocal ft=html
-    au BufRead,BufNewFile *.txt setlocal ft=asciidoc
+"     au BufRead,BufNewFile *.txt setlocal ft=asciidoc
     au BufRead *.hva setlocal ft=tex
     au BufWrite *.html :Autoformat
     au BufAdd,BufNewFile,BufRead * call init#setupProjectDir()
@@ -512,6 +512,7 @@ let g:fzf_layout = g:fzf_horizontal
 let g:fzf_extra_opts = {'options': '--tiebreak=length,end --preview="bat --style=plain --color=always {}"'}
 " let g:fzf_extra_opts = {'options': '--tiebreak=length,end'}
 let g:relpath_cmd = resolve(printf("%s/bin/relpath", expand("<sfile>:p:h")))
+let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 fun! init#agProject(base, ...)
     let l:find_prg = b:find_prg . a:base
@@ -526,6 +527,7 @@ fun! init#agProject(base, ...)
 endfun
 
 nnoremap <silent> <C-P> :<C-u>call fzf#vim#files("", init#agProject(b:base_project_dir, g:fzf_layout, g:fzf_extra_opts))<CR>
+nnoremap <silent> <Tab> :<C-u>call fzf#vim#history()<CR>
 
 " lite DFM
 "
