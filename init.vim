@@ -399,6 +399,9 @@ let g:jedi#rename_command = '<Leader>R'
 let g:jedi#usages_command = '<Leader>n'
 
 " ultisnips / YCM
+" back-compatibility
+let g:_uspy=":py3 "
+
 let g:ycm_extra_conf_globlist = ['~/dev/*','!~/*']
 let g:ycm_autoclose_preview_window_after_completion = 1
 inoremap <expr><c-j>  pumvisible() ? "\<C-n>" : "\<C-j>"
@@ -442,7 +445,11 @@ vmap <silent> <Bar> :EasyAlign*<Bar><CR>
 " vim-go
 let g:go_fmt_command = 'goimports'
 let g:go_fmt_fail_silently = 1
+let g:go_def_mode = 'gopls'
+let g:go_referrers_mode = 'gopls'
 let g:go_def_mapping_enabled = 0
+let g:go_gopls_complete_unimported = 1
+" let g:go_debug = ['lsp']
 " let g:go_def_reuse_buffer = 1
 let g:go_term_mode = "split"
 let g:go_highlight_build_constraints = 1
