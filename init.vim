@@ -235,7 +235,7 @@ nmap <silent> <C-Space> :let &l:iminsert = !&l:iminsert<CR>
 nnoremap <silent> <C-j> :tabprev<CR>
 nnoremap <silent> <C-k> :tabnext<CR>
 nnoremap <silent> <M-l> :nohlsearch<CR><C-L>
-" nnoremap <silent> <Tab> :b#<CR>
+nnoremap <silent> <Tab> :b#<CR>
 map <Space> <C-D>
 nnoremap <BS> <C-O>
 nnoremap <silent> <C-l> :bnext<CR>
@@ -534,7 +534,7 @@ fun! init#agProject(base, ...)
 endfun
 
 nnoremap <silent> <C-P> :<C-u>call fzf#vim#files("", init#agProject(b:base_project_dir, g:fzf_layout, g:fzf_extra_opts))<CR>
-nnoremap <silent> <Tab> :<C-u>call fzf#vim#history()<CR>
+nnoremap <silent> <C-H> :<C-u>call fzf#vim#history()<CR>
 
 " lite DFM
 "
