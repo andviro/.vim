@@ -244,6 +244,8 @@ nnoremap <silent> <C-W>q :bprev <BAR> bdelete #<CR>
 nnoremap <silent> <CR> <C-]>
 nnoremap H <C-o>
 nnoremap L <C-i>
+nnoremap j gj
+nnoremap k gk
 
 " emacs-like insert mode
 cnoremap <C-A>      <Home>
