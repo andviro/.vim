@@ -58,9 +58,24 @@ call plug#begin()
     Plug 'metakirby5/codi.vim'
     Plug 'w0rp/ale'
     if has("nvim")
-        Plug 'roxma/nvim-completion-manager'
+        Plug 'ncm2/ncm2'
+        Plug 'roxma/nvim-yarp'
+
+        " enable ncm2 for all buffers
+        autocmd BufEnter * call ncm2#enable_for_buffer()
+        " resize bug in i3+nvim+alacritty
+        autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
+
+        " IMPORTANT: :help Ncm2PopupOpen for more information
+        set completeopt=noinsert,menuone,noselect
+
+        " NOTE: you need to install completion sources to get completions. Check
+        " our wiki page for a list of sources: https://github.com/ncm2/ncm2/wiki
+        Plug 'ncm2/ncm2-bufword'
+        Plug 'ncm2/ncm2-path'
     else
         Plug 'maralla/completor.vim'
+        set completeopt=longest,menuone
     endif
     Plug 'andviro/flake8-vim'
     Plug 'davidhalter/jedi-vim'
@@ -82,6 +97,8 @@ call plug#begin()
     "Plug 'KabbAmine/zeavim.vim'
     Plug 'tpope/vim-dispatch'
     Plug 'janko-m/vim-test'
+    Plug 'aklt/plantuml-syntax'
+    Plug 'weirongxu/plantuml-previewer.vim' | Plug 'tyru/open-browser.vim'
 
     " misc
     "Plug 'ryanoasis/vim-devicons'
@@ -169,7 +186,6 @@ set splitbelow
 set noequalalways
 set helpheight=10
 set wildmenu
-set completeopt=longest,menuone
 set wildmode=list:longest,full
 
 " i18n
@@ -426,8 +442,8 @@ let g:neomake_list_height=7
 
 " fugitive
 nmap <silent> <Leader>gs :Gstatus<CR>
-nmap <silent> <Leader>gc :Gcommit -v<CR>
-nmap <silent> <Leader>gC :Gcommit -a -v<CR>
+nmap <silent> <Leader>gc :Git commit -v<CR>
+nmap <silent> <Leader>gC :Git commit -a -v<CR>
 nmap <silent> <Leader>ga :Git add %<CR>
 nmap <silent> <Leader>gA :Git add -A .<CR>
 nmap <silent> <Leader>gp :Git push -u origin HEAD<CR>
@@ -515,10 +531,11 @@ let g:ale_set_quickfix = 0
 
 " fzf
 let g:fzf_command_prefix = 'FZF'
+" let g:fzf_horizontal = { 'window': { 'width': 0.9, 'height': 0.6 } }
 let g:fzf_horizontal = { 'window': 'belowright 10new' }
 let g:fzf_vertical = { 'window': 'vertical aboveleft 50new' }
 let g:fzf_layout = g:fzf_horizontal
-let g:fzf_extra_opts = {'options': '--tiebreak=length,end --preview="bat --style=plain --color=always {}"'}
+let g:fzf_extra_opts = {'options': '--tiebreak=length,end --preview="bat --style=plain --color=always --theme \"Solarized (dark)\" {}"'}
 " let g:fzf_extra_opts = {'options': '--tiebreak=length,end'}
 let g:relpath_cmd = resolve(printf("%s/bin/relpath", expand("<sfile>:p:h")))
 let g:fzf_history_dir = '~/.local/share/fzf-history'
