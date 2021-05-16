@@ -152,7 +152,7 @@ set mat=2
 set scrolloff=3
 set nostartofline
 set cursorline
-set colorcolumn=80,120
+" set colorcolumn=80,120
 set textwidth=79
 if has('mouse')
     set mouse=a
@@ -441,7 +441,7 @@ let g:neomake_place_signs=1
 let g:neomake_list_height=7
 
 " fugitive
-nmap <silent> <Leader>gs :Gstatus<CR>
+nmap <silent> <Leader>gs :Git<CR>
 nmap <silent> <Leader>gc :Git commit -v<CR>
 nmap <silent> <Leader>gC :Git commit -a -v<CR>
 nmap <silent> <Leader>ga :Git add %<CR>
