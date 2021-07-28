@@ -8,14 +8,15 @@ call plug#begin()
     Plug 'andviro/NeoSolarized'
     Plug 'jnurmine/Zenburn'
     Plug 'morhetz/gruvbox'
-    Plug 'bling/vim-airline'
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
-    Plug 'junegunn/limelight.vim'
+"     Plug 'bling/vim-airline'
+"     Plug 'vim-airline/vim-airline'
+"     Plug 'vim-airline/vim-airline-themes'
+    Plug 'itchyny/lightline.vim'
+"     Plug 'junegunn/limelight.vim'
     Plug 'bilalq/lite-dfm'
-    Plug 'chase/focuspoint-vim'
+"     Plug 'chase/focuspoint-vim'
     Plug 'keith/parsec.vim'
-    Plug 'reedes/vim-colors-pencil'
+"     Plug 'reedes/vim-colors-pencil'
     Plug 'wincent/terminus'
     if has("nvim")
         Plug 'kassio/neoterm'
@@ -31,13 +32,16 @@ call plug#begin()
     Plug 'junegunn/vim-emoji'
     Plug 'sjl/gundo.vim'
     Plug 'Raimondi/delimitMate'
+"     Plug 'tpope/vim-surround'
     Plug 'terryma/vim-multiple-cursors'
     Plug 'mtth/scratch.vim'
     Plug 'AndrewRadev/splitjoin.vim'
     Plug 'easymotion/vim-easymotion'
     Plug 'fabi1cazenave/suckless.vim'
     Plug 'kshenoy/vim-signature'
-    Plug 'francoiscabrol/ranger.vim'
+"     Plug 'francoiscabrol/ranger.vim'
+"     Plug 'tpope/vim-eunuch'
+    Plug 'godlygeek/tabular'
     if has("nvim")
         Plug 'rbgrouleff/bclose.vim'
     endif
@@ -101,7 +105,7 @@ call plug#begin()
     Plug 'weirongxu/plantuml-previewer.vim' | Plug 'tyru/open-browser.vim'
 
     " misc
-    "Plug 'ryanoasis/vim-devicons'
+    Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 " system
@@ -197,7 +201,7 @@ set imsearch=-1
 
 " appearance
 augroup vimappearance
-    au VimEnter * set laststatus=1
+    au VimEnter * set laststatus=2
 augroup END
 set ruler
 set showcmd
@@ -207,7 +211,7 @@ set background=dark
 set display+=lastline
 let g:neosolarized_contrast='normal'
 let g:neosolarized_visibility='low'
-let g:gruvbox_contrast_dark='soft'
+let g:gruvbox_contrast_dark='medium'
 let g:zenburn_old_Visual = 1
 " colorscheme zenburn
 " colorscheme parsec
@@ -366,10 +370,10 @@ let g:NERDCustomDelimiters = {
 \ }
 
 " nerdtree
-let g:NERDTreeQuitOnOpen = 1
+let g:NERDTreeQuitOnOpen = 0
 nnoremap <silent> <Leader><Tab> :<C-u>NERDTreeFind<CR>
 fun! init#leaveNerdTree()
-    close
+    wincmd p
 endfun
 augroup vimrc
     au VimEnter * call NERDTreeAddKeyMap({
@@ -379,9 +383,12 @@ augroup vimrc
            \})
 augroup END
 
+"lightline
+" let g:lightline = {}
+" let g:lightline.colorscheme = 'solarized'
 " airline
 if !exists('g:airline_symbols')
-let g:airline_symbols = {}
+    let g:airline_symbols = {}
 endif
 " unicode symbols
 let g:airline_powerline_fonts = 0
@@ -491,7 +498,7 @@ let g:scratch_persistence_file = $HOME . '/Dropbox/notes.md'
 nmap gs <plug>(scratch-insert-reuse)
 
 " markdown
-let g:pandoc#formatting#textwidth = 72
+let g:pandoc#formatting#textwidth = 79
 let g:pandoc#formatting#mode = "hA"
 let g:pandoc#folding#mode = "stacked"
 let g:pandoc#folding#fdc = 0
@@ -554,6 +561,8 @@ endfun
 
 nnoremap <silent> <C-P> :<C-u>call fzf#vim#files("", init#agProject(b:base_project_dir, g:fzf_layout, g:fzf_extra_opts))<CR>
 nnoremap <silent> <C-H> :<C-u>call fzf#vim#history()<CR>
+nnoremap <silent> <C-J> :<C-u>call fzf#vim#lines()<CR>
+nnoremap <silent> <C-G> :<C-u>FZFGitFiles?<CR>
 
 " lite DFM
 "
