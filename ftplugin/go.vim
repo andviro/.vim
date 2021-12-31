@@ -6,7 +6,7 @@ nmap <buffer> <leader>r <Plug>(go-run)
 "nmap <buffer> <leader>b :<C-u>GoBuild<CR>
 "nmap <buffer> <leader>b :<C-u>silent make\|echo 'Done'<CR>
 nmap <buffer> <CR> <Plug>(go-def)
-"nmap <buffer> <leader>n <Plug>(go-referrers)
+nmap <buffer> <leader><CR> <Plug>(go-referrers)
 nmap <buffer> <leader>R <Plug>(go-rename)
 nmap <buffer> <C-J> :<C-u>GoDeclsDir<CR>
 "nmap <buffer> <leader>e <Plug>(go-generate)
