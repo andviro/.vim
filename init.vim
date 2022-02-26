@@ -45,6 +45,7 @@ call plug#begin()
     if has("nvim")
         Plug 'rbgrouleff/bclose.vim'
     endif
+
     
     " snippets
     Plug 'sirver/ultisnips'
@@ -568,3 +569,85 @@ nnoremap <silent> <C-G> :<C-u>FZFGitFiles?<CR>
 " lite DFM
 "
 let g:lite_dfm_left_offset = 10
+
+" Playerctl
+" Requirements
+" * vim-airline
+" * playerctl installed on host system
+" Installation
+" Place this code in your vimrc or .config/nvim/init.vim
+
+" Metadata from playerctl
+function g:PlayerctlMetadata ()
+   :silent let l  = system("playerctl metadata title")
+
+   if l =~ 'Connection to player failed: .*'
+        return "No Music"
+   endif
+   return l
+endfunction
+
+" Checks if the timer has ended and if so updates the metadata in vim airline
+" this is for performance reasons only because shell commands take relatively long 
+" and they don't happen asynchriously so we can't execute them as frequent as we would like
+function g:TimedPlayerctlMetadata()
+   if g:TimedPlayerCtl == "ready"
+      let l = g:PlayerctlMetadata()
+      let g:PlayerctlBuf = l
+      let g:TimedPlayerCtl = "paused"
+   else
+      let l = g:PlayerctlBuf
+   end
+   return l
+endfunction
+
+" Sets the status the vim airline as ready; is used to signal the TimedPlayerctlMetadata
+" function that it is allowed to update the status in vim airline
+function g:EnableTimedPlayerCtlMetadata(...)
+   let g:TimedPlayerCtl = "ready"
+endfunction
+
+" Plays the next song through playerctl
+function g:PlayerctlNext()
+   :silent let l = system("playerctl next")
+endfunction
+
+function g:PlayerctlPlay()
+   :silent let l = system("playerctl play")
+endfunction
+
+" 
+function g:PlayerctlPause()
+   :silent let l = system("playerctl pause")
+endfunction
+
+" Plays the previous song through playerctl
+function g:PlayerctlPrev()
+   :silent let l = system("playerctl previous")
+endfunction
+
+" Call this through a timer if the status doesn't seem to update in vim airline
+function g:PlayerCtlUpdate()
+   call airline#update_statusline()
+endfunction
+
+" Initiates the vim airline status
+function g:PlayerctlAirline(...)
+   if !exists("g:loaded_vim_airline_playerctl")
+      let g:PlayerctlBuf = "No Music"
+      let g:TimedPlayerCtl = "ready"
+      let g:airline_section_z .= " ".g:airline_left_alt_sep." ".airline#section#create_right(['♫ %{g:TimedPlayerctlMetadata()}'])
+      let g:loaded_vim_airline_playerctl = 1
+   endif
+endfunction
+
+" call airline#add_statusline_func("g:PlayerctlAirline")
+
+" Playerctl commands for controlling spotify etal
+command Pnext call g:PlayerctlNext()
+command Ppause call g:PlayerctlPause()
+command Pplay call g:PlayerctlPlay()
+command Pprev call g:PlayerctlPrev()
+
+" playerctl metadata in airline
+" call timer_start(500, "g:EnableTimedPlayerCtlMetadata", {"repeat": -1})
