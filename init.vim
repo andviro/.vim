@@ -316,7 +316,7 @@ fun! init#setupProjectDir() abort
             if isdirectory(l:path)
                 let b:is_git = 1
                 let b:base_project_dir = fnamemodify(l:parent, ':~:.')
-                let b:find_prg = "git ls-files -c -o --exclude-standard -- "
+                let b:find_prg = "git ls-files -c -o --exclude-standard --  ':!:.env' ':!:proto_vendor' ':!:vendor'"
                 return
             endif
         endfor
