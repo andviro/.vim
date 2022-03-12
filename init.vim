@@ -316,7 +316,7 @@ fun! init#setupProjectDir() abort
             if isdirectory(l:path)
                 let b:is_git = 1
                 let b:base_project_dir = fnamemodify(l:parent, ':~:.')
-                let b:find_prg = "git ls-files -c -o --exclude-standard --  ':!:.env' ':!:proto_vendor' ':!:vendor'"
+                let b:find_prg = "git ls-files -c -o --exclude-standard -- "
                 return
             endif
         endfor
@@ -552,7 +552,7 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 fun! init#agProject(base, ...)
     let l:find_prg = b:find_prg . a:base
     if l:find_prg =~ "git"
-        let l:find_prg = l:find_prg . " ':!:vendor' ':!:node_modules'"
+        let l:find_prg = l:find_prg . " ':^/:.env' ':^/:vendor' ':^/:proto_vendor' ':^/:node_modules'"
     endif
     let l:res ={'source': l:find_prg . ' | ' . g:relpath_cmd . ' ' . expand("%:p:h")}
     for eopts in a:000
